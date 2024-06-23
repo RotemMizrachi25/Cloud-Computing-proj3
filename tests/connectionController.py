@@ -17,7 +17,7 @@ def http_post(resource: str, data: {}):
     return response
 
 def http_get_qs(resource: str, query_string: str):
-    response = requests.get(url=f"{URL}/{resource}?{query_string}", headers={})
+    response = requests.get(url=f"{URL}/{resource}{query_string}", headers={})
     return response
 
 
