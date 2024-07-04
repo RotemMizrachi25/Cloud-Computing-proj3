@@ -93,6 +93,7 @@ jobs:
           pytest -v ./tests/assn3_tests.py > assn3_test_results.txt
 
       - name: Log test results
+        if: always()
         run: |
           if grep -q "Container up and running" Log/log.txt; then
             if grep -q "FAILED" assn3_test_results.txt; then
