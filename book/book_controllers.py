@@ -79,7 +79,7 @@ class BookOperations:
                     'publisher': missing,
                     'publishedDate': missing,
                 }
-                return google_params, 200
+                return google_params, 500
             # Extract the relevant data
             google_data = google_response.json()['items'][0]['volumeInfo']
             authors = google_data.get('authors')
