@@ -110,7 +110,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Log
+          name: Updated Log
           path: Log/log.txt
 
       - name: Tear down Docker Compose
