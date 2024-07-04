@@ -101,12 +101,12 @@ jobs:
             book8='{"title":"Second Foundation","ISBN":"9780553293364","genre":"Science Fiction"}'
             
             # Perform POST requests using curl or similar
-            curl -X POST -H "Content-Type: application/json" -d "$book1" http://127.0.0.1:5001/books
-            curl -X POST -H "Content-Type: application/json" -d "$book2" http://127.0.0.1:5001/books
-            curl -X POST -H "Content-Type: application/json" -d "$book3" http://127.0.0.1:5001/books
-            curl -X POST -H "Content-Type: application/json" -d "$book6" http://127.0.0.1:5001/books
-            curl -X POST -H "Content-Type: application/json" -d "$book7" http://127.0.0.1:5001/books
-            curl -X POST -H "Content-Type: application/json" -d "$book8" http://127.0.0.1:5001/books
+            curl -X POST -m 10 -H "Content-Type: application/json" -d "$book1" http://127.0.0.1:5001/books
+            curl -X POST -m 10 -H "Content-Type: application/json" -d "$book2" http://127.0.0.1:5001/books
+            curl -X POST -m 10 -H "Content-Type: application/json" -d "$book3" http://127.0.0.1:5001/books
+            curl -X POST -m 10 -H "Content-Type: application/json" -d "$book6" http://127.0.0.1:5001/books
+            curl -X POST -m 10 -H "Content-Type: application/json" -d "$book7" http://127.0.0.1:5001/books
+            curl -X POST -m 10 -H "Content-Type: application/json" -d "$book8" http://127.0.0.1:5001/books
 
       - name: Read query.txt file
         run: |
@@ -128,6 +128,7 @@ jobs:
 
       - name: Upload response.txt
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: response-results
           path: response.txt
