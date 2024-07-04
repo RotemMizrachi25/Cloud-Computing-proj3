@@ -21,7 +21,7 @@ def test_post_books():
     for book in books:
         response = cc.http_post('books', book)
         assert response.status_code == 201
-        book_id = response.json()
+        book_id = response.json()['id']
         assert book_id not in ids
         ids.add(book_id)
         book_ids[book['title']] = book_id
