@@ -112,15 +112,18 @@ jobs:
         run: |
           cat query.txt | while read line
           do
-            qs="$line"
-            response=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:5000/books?$qs")
+            # Perform GET request for each query string
+            response=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:5001/books$line")
+        
+            # Check if response is successful (status code 200)
             if [ $response -eq 200 ]; then
-              json=$(curl -s "http://localhost:5000/books?$qs")
-              echo "query: $qs" >> response.txt
-              echo "response: $json" >> response.txt
+                json=$(curl -s "http://localhost:5001/books$line")
+                echo "query: $line" >> response.txt
+                echo "response: $json" >> response.txt
             else
-              echo "query: $qs" >> response.txt
-              echo "response: error $response" >> response.txt
+                # Handle error status code
+                echo "query: $line" >> response.txt
+                echo "response: error $response" >> response.txt
             fi
           done
 
