@@ -40,7 +40,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: book-service
-          path: /tmp/image.tar, log.txt
+          path: /tmp/image.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Log
+          path: log.txt
 
   test:
     runs-on: ubuntu-latest
@@ -99,7 +105,13 @@ jobs:
         if: always()
         with:
           name: assn3_test_results
-          path: assn3_test_results.txt,log.txt
+          path: assn3_test_results.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Log
+          path: log.txt
 
       - name: Tear down Docker Compose
         run: docker-compose -f ./docker-compose.yml down
