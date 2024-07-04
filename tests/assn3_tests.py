@@ -6,7 +6,7 @@ from assertions import *
 book1 = {"title": "Adventures of Huckleberry Finn", "ISBN": "9780520343641", "genre": "Fiction"}
 book2 = {"title": "The Best of Isaac Asimov", "ISBN": "9780385050784", "genre": "Science Fiction"}
 book3 = {"title": "Fear No Evil", "ISBN": "9780394558783", "genre": "Biography"}
-book4 = {"title": "No such book", "ISBN": "000000111111", "genre": "Biography"}
+book4 = {"title": "No such book", "ISBN": "0000001111111", "genre": "Biography"}
 book5 = {"title": "The Greatest Joke Book Ever", "authors": "Mel Greene", "ISBN": "9780380798490", "genre": "Jokes"}
 Book6 = {"title": "The Adventures of Tom Sawyer", "ISBN": "9780195810400", "genre": "Fiction"}
 book7 = {"title": "I, Robot", "ISBN": "9780553294385", "genre": "Science Fiction"}
