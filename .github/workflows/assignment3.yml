@@ -62,7 +62,7 @@ jobs:
 
       - name: Run pytest tests
         run: |
-          pytest -v assn3_tests.py > assn3_test_results.txt
+          pytest -v ./tests/assn3_tests.py > assn3_test_results.txt
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
