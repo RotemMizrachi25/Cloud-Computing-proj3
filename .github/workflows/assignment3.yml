@@ -46,7 +46,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Log
+          name: Log_file
           path: log.txt
 
   test:
@@ -70,11 +70,11 @@ jobs:
 
       - name: Log container status
         run: |
-          if grep -q "image successfully built" Log/log.txt; then
+          if grep -q "image successfully built" Log_file/log.txt; then
             if docker-compose -f ./docker-compose.yml ps | grep -q "Up"; then
-              echo "Container up and running" >> Log/log.txt
+              echo "Container up and running" >> Log_file/log.txt
             else
-              echo "Container failed to run" >> Log/log.txt
+              echo "Container failed to run" >> Log_file/log.txt
             fi
           fi
 
@@ -95,11 +95,11 @@ jobs:
       - name: Log test results
         if: always()
         run: |
-          if grep -q "Container up and running" Log/log.txt; then
+          if grep -q "Container up and running" Log_file/log.txt; then
             if grep -q "FAILED" assn3_test_results.txt; then
-              echo "tests failed" >> Log/log.txt
+              echo "tests failed" >> Log_file/log.txt
             else
-              echo "tests succeeded" >> Log/log.txt
+              echo "tests succeeded" >> Log_file/log.txt
             fi
           fi
       - name: Upload test results
@@ -113,8 +113,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Updated Log
-          path: Log/log.txt
+          name: Log File - Final version
+          path: Log_file/log.txt
 
       - name: Tear down Docker Compose
         run: docker-compose -f ./docker-compose.yml down
