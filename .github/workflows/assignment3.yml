@@ -69,11 +69,11 @@ jobs:
 
       - name: Log container status
         run: |
-          if grep -q "image successfully built" log.txt; then
+          if grep -q "image successfully built" Log/log.txt; then
             if docker-compose -f ./docker-compose.yml ps | grep -q "Up"; then
-              echo "Container up and running" >> log.txt
+              echo "Container up and running" >> Log/log.txt
             else
-              echo "Container failed to run" >> log.txt
+              echo "Container failed to run" >> Log/log.txt
             fi
           fi
 
@@ -93,11 +93,11 @@ jobs:
 
       - name: Log test results
         run: |
-          if grep -q "Container up and running" log.txt; then
+          if grep -q "Container up and running" Log/log.txt; then
             if grep -q "FAILED" assn3_test_results.txt; then
-              echo "tests failed" >> log.txt
+              echo "tests failed" >> Log/log.txt
             else
-              echo "tests succeeded" >> log.txt
+              echo "tests succeeded" >> Log/log.txt
             fi
           fi
       - name: Upload test results
@@ -111,7 +111,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Log
-          path: log.txt
+          path: Log/log.txt
 
       - name: Tear down Docker Compose
         run: docker-compose -f ./docker-compose.yml down
