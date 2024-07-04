@@ -1,6 +1,6 @@
 FROM python:3.12.2-slim as base
 WORKDIR /app
-COPY book_controller.py .
+COPY book_controllers.py .
 COPY book_main.py .
 RUN pip install flask
 RUN pip install flask_restful
