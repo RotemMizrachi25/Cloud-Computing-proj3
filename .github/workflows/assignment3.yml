@@ -37,9 +37,6 @@ jobs:
 
       - name: Download Docker image artifact
         uses: actions/download-artifact@v4
-        #with:
-         # name: book-service
-          #path: /tmp/image.tar
 
       - name: Load Docker images from artifact
         run: docker load --input book-service/image.tar
@@ -83,12 +80,9 @@ jobs:
 
       - name: Download Docker image artifact
         uses: actions/download-artifact@v4
-        with:
-          name: book-service
-          path: /tmp/image.tar
 
       - name: Load Docker images from artifact
-        run: docker load --input /tmp/image.tar
+        run: docker load --input book-service/image.tar
 
       - name: Set up Docker Compose
         run: docker-compose -f ./docker-compose.yml up -d
@@ -96,16 +90,40 @@ jobs:
       - name: Check container is running
         run: docker ps
 
+      - name: POST Books
+        run: |
+            # Define books as JSON strings
+            book1='{"title":"Adventures of Huckleberry Finn","ISBN":"9780520343641","genre":"Fiction"}'
+            book2='{"title":"The Best of Isaac Asimov","ISBN":"9780385050784","genre":"Science Fiction"}'
+            book3='{"title":"Fear No Evil","ISBN":"9780394558783","genre":"Biography"}'
+            book6='{"title":"The Adventures of Tom Sawyer","ISBN":"9780195810400","genre":"Fiction"}'
+            book7='{"title":"I, Robot","ISBN":"9780553294385","genre":"Science Fiction"}'
+            book8='{"title":"Second Foundation","ISBN":"9780553293364","genre":"Science Fiction"}'
+            
+            # Perform POST requests using curl or similar
+            curl -X POST -H "Content-Type: application/json" -d "$book1" http://127.0.0.1:5001/books
+            curl -X POST -H "Content-Type: application/json" -d "$book2" http://127.0.0.1:5001/books
+            curl -X POST -H "Content-Type: application/json" -d "$book3" http://127.0.0.1:5001/books
+            curl -X POST -H "Content-Type: application/json" -d "$book6" http://127.0.0.1:5001/books
+            curl -X POST -H "Content-Type: application/json" -d "$book7" http://127.0.0.1:5001/books
+            curl -X POST -H "Content-Type: application/json" -d "$book8" http://127.0.0.1:5001/books
+
       - name: Read query.txt file
         run: |
           cat query.txt | while read line
           do
-            # Perform GET request for each query string
-            response=$(curl -s "http://localhost:5001/books$line")
-            
-            # Write to response.txt
+          # Perform GET request for each query string
+          response=$(curl -s "http://localhost:5001/books$line")
+          # Check if response is empty or not JSON
+          if [[ -z "$response" || ! "$response" =~ ^\{.*\}$ ]]; then
+            # Handle error status code
+            echo "query: $line" >> response.txt
+            echo "response: error $(curl -w "%{http_code}" -s -o /dev/null "http://localhost:5001/books$line")" >> response.txt
+          else
+            # Write successful response to response.txt
             echo "query: $line" >> response.txt
             echo "response: $response" >> response.txt
+          fi
           done
 
       - name: Upload response.txt

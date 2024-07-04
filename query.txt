@@ -1,0 +1,6 @@
+?title=Adventures%20of%20Huckleberry%20Finn
+?title=The%20Best%20of%20Isaac%20Asimov
+?title=The%20Adventures%20of%20Tom%20Sawyer
+?genre=Fiction
+?isbn=9780385050784
+?title=Second%20Foundation
