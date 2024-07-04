@@ -37,12 +37,12 @@ jobs:
 
       - name: Download Docker image artifact
         uses: actions/download-artifact@v4
-        with:
-          name: book-service
-          path: /tmp/image.tar
+        #with:
+         # name: book-service
+          #path: /tmp/image.tar
 
       - name: Load Docker images from artifact
-        run: docker load --input /tmp/image.tar
+        run: docker load --input book-service/image.tar
 
       - name: Set up Docker Compose
         run: docker-compose -f ./docker-compose.yml up -d
