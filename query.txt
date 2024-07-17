@@ -4,4 +4,4 @@
 ?genre=Fiction
 ?ISBN=9780385050784
 ?title=Second%20Foundation
-?test=1
+?ISBN=9780385050784
