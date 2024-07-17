@@ -7,8 +7,7 @@ import connectionController
 
 
 def assert_status_code(response: requests.Response, status_code: int):
-    #assert response.status_code == status_code
-    assert response.status_code == "1"
+    assert response.status_code == status_code
 
 
 def assert_ret_value(response: requests.Response, returned_value: any):

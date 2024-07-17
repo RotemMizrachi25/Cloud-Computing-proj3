@@ -30,7 +30,8 @@ def test_post_books():
 def test_get_book1_by_id():
     book_id = book_ids.get("Adventures of Huckleberry Finn")
     response = cc.http_get(f'books/{book_id}')
-    assert response.status_code == 200
+    #assert response.status_code == 200
+    assert response.status_code == 700
     assert response.json()['authors'] == "Mark Twain"
 
 
