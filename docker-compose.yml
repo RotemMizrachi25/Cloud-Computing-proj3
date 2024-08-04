@@ -8,7 +8,7 @@ services:
     networks:
       - backend
   booksrv:
-    image: book-service:latest
+    # image: book-service:latest
     depends_on:
       - mongo
     ports:
