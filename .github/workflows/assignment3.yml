@@ -63,7 +63,7 @@ jobs:
         run: docker load --input book-service/image.tar
 
       - name: Set up Docker Compose
-        run: docker-compose -f ./docker-compose.yml up -d
+        run: docker compose -f ./docker-compose.yml up -d
 
       - name: Check container is running
         run: docker ps
@@ -71,7 +71,7 @@ jobs:
       - name: Log container status
         run: |
           if grep -q "image successfully built" Log_file/log.txt; then
-            if docker-compose -f ./docker-compose.yml ps | grep -q "Up"; then
+            if docker compose -f ./docker-compose.yml ps | grep -q "Up"; then
               echo "Container up and running" >> Log_file/log.txt
             else
               echo "Container failed to run" >> Log_file/log.txt
@@ -118,7 +118,7 @@ jobs:
           overwrite: true
 
       - name: Tear down Docker Compose
-        run: docker-compose -f ./docker-compose.yml down
+        run: docker compose -f ./docker-compose.yml down
 
   query:
     runs-on: ubuntu-latest
@@ -134,7 +134,7 @@ jobs:
         run: docker load --input book-service/image.tar
 
       - name: Set up Docker Compose
-        run: docker-compose -f ./docker-compose.yml up -d
+        run: docker compose -f ./docker-compose.yml up -d
 
       - name: Check container is running
         run: docker ps
@@ -184,4 +184,4 @@ jobs:
           path: response.txt
 
       - name: Tear down Docker Compose
-        run: docker-compose -f ./docker-compose.yml down
+        run: docker compose -f ./docker-compose.yml down
