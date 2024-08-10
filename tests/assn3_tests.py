@@ -36,7 +36,7 @@ def test_get_book1_by_id():
 
 def test_get_all_books():
     response = cc.http_get("books")
-    assert response.status_code == 404
+    assert response.status_code == 200
     assert len(response.json()) == 3
 
 
